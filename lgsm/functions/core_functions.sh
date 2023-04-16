@@ -456,6 +456,11 @@ fix_tf2.sh() {
 	fn_fetch_function
 }
 
+fix_tmodloader.sh() {
+	functionfile="${FUNCNAME[0]}"
+	fn_fetch_function
+}
+
 fix_ut3.sh() {
 	functionfile="${FUNCNAME[0]}"
 	fn_fetch_function

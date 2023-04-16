@@ -843,6 +843,13 @@ elif [ "${shortname}" == "terraria" ]; then
 	fn_default_config_remote
 	fn_set_config_vars
 	fn_list_config_locations
+elif [ "${shortname}" == "tmodloader" ]; then
+	gamedirname="tModLoader"
+	array_configs+=(serverconfig.txt)
+	fn_fetch_default_config
+	fn_default_config_remote
+	fn_set_config_vars
+	fn_list_config_locations
 elif [ "${shortname}" == "tu" ]; then
 	gamedirname="TowerUnite"
 	fn_check_cfgdir

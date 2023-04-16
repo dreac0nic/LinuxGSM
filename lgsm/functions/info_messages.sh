@@ -691,6 +691,8 @@ fn_info_message_ports() {
 		echo -e "ss -tuplwn | grep java"
 	elif [ "${shortname}" == "terraria" ]; then
 		echo -e "ss -tuplwn | grep Main"
+	elif [ "${shortname}" == "tmodloader" ]; then
+		echo -e "ss -tuplwn | grep Main"
 	elif [ "${engine}" == "source" ]; then
 		echo -e "ss -tuplwn | grep srcds_linux"
 	elif [ "${engine}" == "goldsrc" ]; then
@@ -1506,6 +1508,14 @@ fn_info_message_terraria() {
 	} | column -s $'\t' -t
 }
 
+fn_info_message_tmodloader() {
+	{
+		fn_port "header"
+		fn_port "Game" port tcp
+		fn_port "Query" queryport tcp
+	} | column -s $'\t' -t
+}
+
 fn_info_message_tu() {
 	{
 		fn_port "header"
@@ -1801,6 +1811,8 @@ fn_info_message_select_engine() {
 		fn_info_message_terraria
 	elif [ "${shortname}" == "ti" ]; then
 		fn_info_message_ti
+	elif [ "${shortname}" == "tmodloader" ]; then
+		fn_info_message_tmodloader
 	elif [ "${shortname}" == "ts3" ]; then
 		fn_info_message_ts3
 	elif [ "${shortname}" == "tu" ]; then

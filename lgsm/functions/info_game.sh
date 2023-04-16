@@ -1901,6 +1901,30 @@ fn_info_game_terraria() {
 	fi
 }
 
+fn_info_game_tmodloader() {
+	# Config
+	if [ ! -f "${servercfgfullpath}" ]; then
+		servername="${unavailable}"
+		port="${zero}"
+		gameworld="${unavailable}"
+		maxplayers="${zero}"
+		queryport="${zero}"
+	else
+		servername=$(grep "worldname" "${servercfgfullpath}" | sed -e 's/^[ \t]*//g' -e '/^#/d' -e 's/worldname//g' | tr -d '=\";,:' | sed -e 's/^[ \t]*//' -e 's/[ \t]*$//')
+		port=$(grep "port" "${servercfgfullpath}" | tr -cd '[:digit:]')
+		queryport=${port:-"0"}
+		gameworld=$(grep "world=" "${servercfgfullpath}" | grep -v "//" | sed -e 's/^[ \t]*//g' -e '/^#/d' -e 's/world=//g' | tr -d '=\";,:' | sed -e 's/^[ \t]*//' -e 's/[ \t]*$//')
+		maxplayers=$(grep "maxplayers" "${servercfgfullpath}" | grep -v "//" | tr -cd '[:digit:]')
+
+		# Not set
+		servername=${servername:-"NOT SET"}
+		port=${port:-"0"}
+		queryport=${queryport:-"0"}
+		gameworld=${gameworld:-"NOT SET"}
+		maxplayers=${maxplayers:-"0"}
+	fi
+}
+
 fn_info_game_stn() {
 	# Config
 	if [ ! -f "${servercfgfullpath}" ]; then
@@ -2507,6 +2531,8 @@ elif [ "${shortname}" == "terraria" ]; then
 	fn_info_game_terraria
 elif [ "${shortname}" == "ti" ]; then
 	fn_info_game_ti
+elif [ "${shortname}" == "tmodloader" ]; then
+	fn_info_game_tmodloader
 elif [ "${shortname}" == "ts3" ]; then
 	fn_info_game_ts3
 elif [ "${shortname}" == "tu" ]; then
